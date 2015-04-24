@@ -1,0 +1,27 @@
+<div align="center">
+
+<p><?php print_string("paymentrequired") ?></p>
+<p><b><?php echo $instancename; ?></b></p>
+<p><b><?php echo get_string("cost").": {$instance->currency} {$localisedcost}"; ?></b></p>
+<p><?php print_string("paymentinstant") ?></p>
+<?php
+    $stripeurl = empty($CFG->usestripesandbox) ? 'https://www.stripe.com/cgi-bin/webscr' : 'https://www.sandbox.stripe.com/cgi-bin/webscr';
+?>
+<form action="<?php echo "$CFG->wwwroot/enrol/stripe/purchase.php?id=$course->id" ?>" method="post">
+<script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<?php p($this->get_config('stripeapikey'))?>"
+    data-image="/img/documentation/checkout/marketplace.png"
+    data-name="Stripe.com"
+    data-description="<?php p($coursefullname) ?>"
+    data-amount="<?php p($cost) ?>">
+	data-currency="<?php p($instance->currency) ?>"
+	data-email="<?php p($USER->email) ?>"
+	data-label="<?php print_string("sendpaymentbutton", "enrol_stripe") ?>"
+  </script>
+  <input type="hidden" name="custom" value="<?php echo "{$USER->id}-{$course->id}-{$instance->id}" ?>" />
+</form>
+
+
+
+</div>
