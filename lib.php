@@ -147,7 +147,7 @@ class enrol_stripe_plugin extends enrol_plugin {
      * @return string html text, usually a form in a text box
      */
     function enrol_page_hook(stdClass $instance) {
-        global $CFG, $USER, $OUTPUT, $PAGE, $DB;
+        global $CFG, $USER, $OUTPUT, $PAGE, $DB, $SITE;
 
         ob_start();
 
